@@ -1,15 +1,14 @@
 import "../scss/style.scss";
 import debounce from "./debounce";
+import fetchResponse from "./request";
 
 const searchBar = document.querySelector(".search-input");
 
-const fetchResponse = async function () {
-  await fetch("https://jsonplaceholder.typicode.com/posts")
-    .then((res) => res.json())
-    .then((res) => console.log(res));
-};
+const debounceFn = debounce(
+  async () => await fetchResponse(searchBar.value),
+  500
+);
 
 searchBar.addEventListener("keyup", (e) => {
-  const debounceFn = debounce(async () => await fetchResponse(), 500);
   return debounceFn();
 });
