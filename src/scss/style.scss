@@ -1,11 +1,15 @@
-$bgColor: #24292e;
+$bgColor: #c4c4c4;
 $text: #fff;
 
 @font-face {
-  font-family: 'Comic';
-  src: url('../fonts/comic.ttf') format('truetype');
+  font-family: "Comic";
+  src: url("../fonts/comic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -14,4 +18,20 @@ body {
   font-family: Comic, sans-serif;
   background-color: $bgColor;
   color: $text;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-input {
+  width: 500px;
+  height: 61px;
+  padding: 10px;
+  font-size: 48px;
 }
