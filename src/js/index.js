@@ -1,14 +1,14 @@
 import "../scss/style.scss";
+import * as elements from "./elements";
 import debounce from "./debounce";
 import fetchResponse from "./request";
 
-const searchBar = document.querySelector(".search-input");
-
 const debounceFn = debounce(
-  async () => await fetchResponse(searchBar.value),
+  async () => await fetchResponse(elements.searchBar.value),
   500
 );
 
-searchBar.addEventListener("keyup", (e) => {
+elements.searchBar.addEventListener("input", (e) => {
+  elements.suggestList.innerHTML = "";
   return debounceFn();
 });
