@@ -11,15 +11,15 @@ const createSuggest = function (response) {
   let suggestList = new DocumentFragment();
   const suggestArr = [];
 
-  response.items.forEach((elem) => {
+  response.items.forEach(({ name, owner, stargazers_count }) => {
     let item = document.createElement("li");
     item.classList.add("suggest-item");
 
-    item.textContent = elem.name;
+    item.textContent = name;
 
-    item.dataset.name = elem.name;
-    item.dataset.owner = elem.owner.login;
-    item.dataset.stars = elem.stargazers_count;
+    item.dataset.name = name;
+    item.dataset.owner = owner.login;
+    item.dataset.stars = stargazers_count;
 
     suggestArr.push(item);
 
@@ -29,6 +29,11 @@ const createSuggest = function (response) {
     }
   });
   return suggestList;
+};
+
+const clickHandler = (e) => {
+  e.preventDefault();
+  e.target.parentNode.parentNode.removeChild(e.target.parentNode);
 };
 
 const chooseSuggest = function (suggestItem) {
@@ -43,10 +48,8 @@ const chooseSuggest = function (suggestItem) {
   card.classList.add("rep-card");
   cardInfo.classList.add("card-info");
   closeButton.classList.add("close-button");
-  closeButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-  });
+
+  closeButton.addEventListener("click", clickHandler);
 
   cardInfo.insertAdjacentHTML("afterbegin", infoHtml);
   card.insertAdjacentElement("afterbegin", cardInfo);
